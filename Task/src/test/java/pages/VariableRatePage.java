@@ -42,6 +42,8 @@ public class VariableRatePage {
 	}
 	
 	public void enterLoanAmount(String amount){
+		
+		LoanAmountTextbox.clear();
 		LoanAmountTextbox.sendKeys(amount);
 	}
 	
@@ -53,6 +55,8 @@ public class VariableRatePage {
 	}
 	
 	public void enterInterest(String interest){
+		
+		InterestTextbox.clear();
 		InterestTextbox.sendKeys(interest);
 	}
 	

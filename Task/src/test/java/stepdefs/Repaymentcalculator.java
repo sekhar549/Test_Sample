@@ -2,10 +2,13 @@ package stepdefs;
 
 import helper.Browser;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import pages.Homepage;
 import pages.PersonalLoans;
@@ -38,15 +41,19 @@ public class Repaymentcalculator
 		
 		case "Personal":
 			new Homepage(driver).clickPersonalLink();
+			break;
 		
 		case "Personal Loans":
 			new Homepage(driver).clickPersonalLoansLink();
+			break;
 			
 		case "ANZ Variable Rate Loan":
 			new PersonalLoans(driver).clickVariableRateLink();
+			break;
 			
 		case "Repayment calculator":
 			new VariableRatePage(driver).clickRepaymentLink();
+			break;
 			
 		default:
 			break;
@@ -82,11 +89,16 @@ public class Repaymentcalculator
 	}
 
 	@Then("customer can see the repayment amount")
-	public void customer_can_see_the_repayment_amount() {
+	public void customer_can_see_the_repayment_amount() throws ParseException {
 	   
 		
-		System.out.println("calculating your loan amount");
-		System.out.println(new VariableRatePage(driver).getRepaymentAmount());
+		
+		NumberFormat format = NumberFormat.getCurrencyInstance();
+		Number number = format.parse(new VariableRatePage(driver).getRepaymentAmount());
+		
+		
+				
+		Assert.assertNotEquals(number, 0);
 		
 	    
 	}
